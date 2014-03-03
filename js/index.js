@@ -2,7 +2,7 @@
 var REFRESHINTERVAL = 500;
 var state = 1;
 var paused = true;
-
+var STATEPATH = "/PerfusionController/PythonServer/state.json"
 
 
 function refresh()
@@ -23,7 +23,7 @@ function sendUpdatedState(state)
 function getUpdatedState()
 {
     
-    $.get("/PerfusionController/PythonServer/state.json",function(data,status){
+    $.get(STATEPATH,function(data,status){
           state++;
     //      alert("Data: " + data + "\nStatus: " + status);
           });

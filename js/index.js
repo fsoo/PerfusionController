@@ -20,16 +20,31 @@ function sendUpdatedState(state)
     
 }
 
+function parsestate(rawjsondata)
+{
+    var jsondata = JSON.parse(rawjsondata);
+
+    $('#ServerTime').text(jsondata.ServerTime);
+    $('#ElapsedTime').val(jsondata.ElapsedTime);
+    $('#FixTime').val(jsondata.FixTime);
+    $('#EtOHTime').val(jsondata.EtOHTime);
+    $('#AcetoneTime').val(jsondata.AcetoneTime);
+    $('#TotalTime').val(jsondata.TotalTime);
+    
+    return jsondata;
+
+}
+
+
 function getUpdatedState()
 {
-    
+    var s;
     $.get(STATEPATH,function(data,status){
-          state++;
-    //      alert("Data: " + data + "\nStatus: " + status);
+               s= parsestate(data);
           });
     
-    $('#ElapsedTimeInput').val(state);
-    return state;
+   
+    return s;
     
 }
 
@@ -45,11 +60,11 @@ jQuery(function($){
            },REFRESHINTERVAL);
        
        
-       $('#ElapsedTimeInput').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#FixTimeInput').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#EtOHTimeInput').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#AcetoneTimeInput').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#TotalTimeInput').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+       $('#ElapsedTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+       $('#FixTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+       $('#EtOHTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+       $('#AcetoneTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+       $('#TotalTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
        
        
        

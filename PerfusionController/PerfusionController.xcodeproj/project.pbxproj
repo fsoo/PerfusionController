@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		786355DE18C51BB000818957 /* Cochlear_Siegfried_nginx.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cochlear_Siegfried_nginx.conf; path = ../Cochlear_Siegfried_nginx.conf; sourceTree = "<group>"; };
 		78776BA118C0DCF80016FE11 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = ../index.html; sourceTree = "<group>"; };
 		78776BA218C0DD080016FE11 /* hellotest.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = hellotest.py; path = ../PythonServer/hellotest.py; sourceTree = "<group>"; };
 		78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cochlear_nginx.conf; path = ../Cochlear_nginx.conf; sourceTree = "<group>"; };
@@ -23,6 +24,7 @@
 			children = (
 				78776BAD18C4D4980016FE11 /* jquery.mask.js */,
 				78776BA918C4B6320016FE11 /* index.js */,
+				786355DE18C51BB000818957 /* Cochlear_Siegfried_nginx.conf */,
 				78776BA218C0DD080016FE11 /* hellotest.py */,
 				78776BA618C0E2170016FE11 /* startUWSGI.sh */,
 				78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */,

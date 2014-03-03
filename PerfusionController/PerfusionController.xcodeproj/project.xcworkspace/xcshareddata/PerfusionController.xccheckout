@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0635EB2C-F781-48B5-BC34-DE0B962FFECA</string>
+	<string>9493F87D-3E4D-456E-B92F-D5A619C0BE03</string>
 	<key>IDESourceControlProjectName</key>
 	<string>PerfusionController</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5791AEE8-4A05-4C19-90B4-2D6831FB1248</key>
+		<key>85E249D4-15F5-4DC8-89D5-5486A27567AE</key>
 		<string>http://github.com/fsoo/PerfusionController</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PerfusionController/PerfusionController.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5791AEE8-4A05-4C19-90B4-2D6831FB1248</key>
+		<key>85E249D4-15F5-4DC8-89D5-5486A27567AE</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5791AEE8-4A05-4C19-90B4-2D6831FB1248</string>
+	<string>85E249D4-15F5-4DC8-89D5-5486A27567AE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5791AEE8-4A05-4C19-90B4-2D6831FB1248</string>
+			<string>85E249D4-15F5-4DC8-89D5-5486A27567AE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>PerfusionController</string>
 		</dict>

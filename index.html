@@ -26,22 +26,25 @@
             <p></p>
             <div class="row">
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span >60% H<sub>2</sub>O</span></div>
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;" style="min-width:60%;"><span >30% EtOH</span></div>
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"><span ></span></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                    id="H2OFlowPercentage"><span >60% H<sub>2</sub>O</span></div>
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;" style="min-width:60%;"
+                    id="EtOHFlowPercentag"><span >30% EtOH</span></div>
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"
+                    id="AcetoneFlowPercentage"><span ></span></div>
             </div>
             </div>
             
             <div class="col-md-12 col-xs-12">
                 <div class="row">
             <div class="btn-group">
-                    <button type="button" class= "btn btn-default btn-lg"><span class="glyphicon glyphicon-fast-backward"></button>
-                    <button type="button" class= "btn btn-default btn-lg"><span class="glyphicon glyphicon-backward"></span></button>
+                    <button type="button" class= "btn btn-default btn-lg FastBackwardButton"><span class="glyphicon glyphicon-fast-backward"></button>
+                    <button type="button" class= "btn btn-default btn-lg BackwardButton"><span class="glyphicon glyphicon-backward"></span></button>
                     
-                    <button type="button" class= "btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
-                    <button type="button" class= "btn btn-default btn-lg"><span class="glyphicon glyphicon-forward"></span></button>
+                    <button type="button" class= "btn btn-default btn-lg PlayButton"><span class="glyphicon glyphicon-play"></span></button>
+                    <button type="button" class= "btn btn-default btn-lg ForwardButton"><span class="glyphicon glyphicon-forward"></span></button>
                     
-                    <button type="button" class= "btn btn-default btn-lg"><span class="glyphicon glyphicon-fast-forward"></span></button>
+                    <button type="button" class= "btn btn-default btn-lg FastForwardButton"><span class="glyphicon glyphicon-fast-forward"></span></button>
                 </div>
                 </p>
             </div>
@@ -214,11 +217,13 @@
             </div>
             <div class="col-md-6 col-xs-6">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span >60%</span></div>
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                        id = "H2OSupplyLevel"
+                        ><span >60%</span></div>
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary ">Open</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
             </div>
         </div>
         
@@ -228,11 +233,13 @@
             </div>
             <div class="col-md-6 col-xs-6">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span >60%</span></div>
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                        id=-"EtOHSupplyLevel"
+                        ><span >60%</span></div>
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary ">Open</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
             </div>
             
         </div>
@@ -243,11 +250,13 @@
             </div>
             <div class="col-md-6 col-xs-6">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span >60%</span></div>
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                        id="AcetoneSupplyLevel"
+                        ><span >60%</span></div>
                 </div>
             </div>
             <div class="col-md-3 col-xs-2">
-                <button type="button" class= "btn btn-xs btn-primary ">Open</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
             </div>
             
         </div>
@@ -257,11 +266,12 @@
             </div>
             <div class="col-md-6 col-xs-6">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span >60%</span></div>
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                        id="WasteSupplyLevel"><span >60%</span></div>
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary ">Open</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
             </div>
             
         </div>

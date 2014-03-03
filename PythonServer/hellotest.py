@@ -1,7 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/Cochlear/PythonServer/')
+@app.route('/PerfusionController/PythonServer/state.json')
 def hello():
     return 'Hello World Again boo!!'
 

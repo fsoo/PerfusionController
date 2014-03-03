@@ -1,0 +1,82 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		78776BA118C0DCF80016FE11 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = ../index.html; sourceTree = "<group>"; };
+		78776BA218C0DD080016FE11 /* hellotest.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = hellotest.py; path = ../PythonServer/hellotest.py; sourceTree = "<group>"; };
+		78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cochlear_nginx.conf; path = ../Cochlear_nginx.conf; sourceTree = "<group>"; };
+		78776BA418C0DE370016FE11 /* uwsgi.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = uwsgi.ini; path = ../PythonServer/uwsgi.ini; sourceTree = "<group>"; };
+		78776BA618C0E2170016FE11 /* startUWSGI.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = startUWSGI.sh; path = ../PythonServer/startUWSGI.sh; sourceTree = "<group>"; };
+		78776BA718C147A10016FE11 /* index2.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index2.html; path = ../index2.html; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		78776B9A18C0DCCF0016FE11 = {
+			isa = PBXGroup;
+			children = (
+				78776BA218C0DD080016FE11 /* hellotest.py */,
+				78776BA618C0E2170016FE11 /* startUWSGI.sh */,
+				78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */,
+				78776BA418C0DE370016FE11 /* uwsgi.ini */,
+				78776BA118C0DCF80016FE11 /* index.html */,
+				78776BA718C147A10016FE11 /* index2.html */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		78776B9B18C0DCCF0016FE11 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 78776B9E18C0DCCF0016FE11 /* Build configuration list for PBXProject "PerfusionController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 78776B9A18C0DCCF0016FE11;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		78776B9F18C0DCCF0016FE11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		78776BA018C0DCCF0016FE11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78776B9E18C0DCCF0016FE11 /* Build configuration list for PBXProject "PerfusionController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78776B9F18C0DCCF0016FE11 /* Debug */,
+				78776BA018C0DCCF0016FE11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 78776B9B18C0DCCF0016FE11 /* Project object */;
+}

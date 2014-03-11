@@ -26,44 +26,75 @@
             <p></p>
            
            
-            <div class="row">
-            <div class="page-header">
-                
-                <h2>PerfusionController <small><span id="ServerTime">xx:xx:xx</span></small>
-                    <img data-src="" alt="...">
-                    </h2>
+            <div>
+            <div class="page-header short-header">
+                <h4 class= "short-header">PerfusionController <small><span id="ServerTime">hx:xx:xx</span></small></h3>
                 </div>
             
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
-                    id="H2OFlowPercentage"><span >60% H<sub>2</sub>O</span></div>
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;" style="min-width:60%;"
-                    id="EtOHFlowPercentag"><span >30% EtOH</span></div>
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"
-                    id="AcetoneFlowPercentage"><span ></span></div>
-            </div>
-            </div>
-            
-            <div class="col-md-12 col-xs-12">
-                <div class="row">
+          
+        
+          <div class = "row">
+             <div class="col-md-8 col-xs-8">
+           
+           <div >
+              <div class="progress level-indicator">
+                  <div class="progress-bar" role="progressbar" id = "H2OFlowRate" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"
+                           id="H2OFlowRate"><span id="H2OFlowRateText">H<sub>2</sub>O 0.6mL/min</span></div>
+              </div>
+              <div class="progress level-indicator">
+                  
+              <div class="progress-bar etoh-progress" role="progressbar" id = "EtOHFlowRate" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"
+                  id="EtOHFlowRate"><span id = "EtOHFlowRateText" >EtOH 0.4mL/min</span></div>
+              </div>
+              <div class="progress level-indicator">
+                  
+              <div class="progress-bar acetone-progress" role="progressbar" id = "AcetoneFlowRate" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                  id="EtOHFlowRate"><span id = "AcetoneFlowRateText" >Acetone 0mL/min</span></div>
+              </div>
             <div class="btn-group">
-                    <button type="button" class= "btn btn-default btn-lg FastBackwardButton"><span class="glyphicon glyphicon-fast-backward"></button>
-                    <button type="button" class= "btn btn-default btn-lg BackwardButton"><span class="glyphicon glyphicon-backward"></span></button>
+                    <button type="button" class= "btn btn-default btn-med ResetButton"><span class="glyphicon glyphicon-fast-backward"></button>
+                    <button type="button" class= "btn btn-default btn-med BackwardButton"><span class="glyphicon glyphicon-backward"></span></button>
                     
-                    <button type="button" class= "btn btn-default btn-lg PlayButton"><span class="glyphicon glyphicon-play"></span></button>
-                    <button type="button" class= "btn btn-default btn-lg ForwardButton"><span class="glyphicon glyphicon-forward"></span></button>
+                    <button type="button" class= "btn btn-default btn-med PlayButton"><span class="glyphicon glyphicon-play"></span></button>
+                    <button type="button" class= "btn btn-default btn-med ForwardButton"><span class="glyphicon glyphicon-forward"></span></button>
                     
-                    <button type="button" class= "btn btn-default btn-lg FastForwardButton"><span class="glyphicon glyphicon-fast-forward"></span></button>
-                </div>
+            <!--        <button type="button" class= "btn btn-default btn-sm FastForwardButton"><span class="glyphicon glyphicon-fast-forward"></span></button>
+  -->
+             </div>
                 </p>
             </div>
+           </div>
+             <div class="col-md-4 col-xs-4">
+                 <ul class="list-group status-short">
+                     <li class="list-group-item lstbox-xs-active" id= "PauseStateIndicator">Pause</li>
+                     <li class="list-group-item lstbox-xs" id= "FixStateIndicator">Fix</li>
+                     <li class="list-group-item lstbox-xs" id= "EtOHStateIndicator">EtOH</li>
+                     <li class="list-group-item lstbox-xs" id= "AcetoneStateIndicator">Acetone</li>
+                     <li class="list-group-item lstbox-xs" id= "EndStateIndicator">End</li>
+                 </ul>
+             </div><!-- /.col-sm-4 -->
+             
+             
                 </div>
         </div>
-    </div>
-
+        <div class = "row">
+            <div class="col-md-8 col-xs-6">
+                Preset
+            </div>
+            <div class = "col-md-6 col-xs-6">
+                <select class="form-control btn-xs btn-primary btn-block" id="Preset">
+                    1 mL/min<span class="caret"></span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><option selected="selected">Human</option></li>
+                        <li><option>Mouse</option></li>
+                        <li><option>New Preset</option></li>
+                        
+                    </ul>
+                </select>     </div>
+        </div>
+        <p></p>
         <div class="col-md-4 col-xs-12 myshow">
             <p></p>
-            <p>
             <div class = "row">
                 <div class="col-md-8 col-xs-8">
                     Elapsed time (hh:mm:ss)
@@ -311,6 +342,60 @@
     background-color:white;
     border:1px solid rgba(86,61,124,.2);
 /*  border-radius:10px;*/
+}
+
+.short-header
+{
+    margin-top:2px;
+    margin-bottom: 2px;
+}
+
+
+.lstbox-xs
+{
+    font-size: 12px;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    
+    
+}
+
+.lstbox-xs-active
+{
+    background-color:red;
+    font-size: 12px;
+    color:white;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    
+    
+}
+
+.status-short
+{
+    padding-bottom:2px;
+    
+    
+}
+.level-indicator
+{
+    margin-bottom:5px;
+    
+}
+
+.etoh-progress
+{
+    background-color:green;
+}
+
+.acetone-progress
+{
+    background-color:red;
+
 }
 
 </style>

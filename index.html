@@ -55,7 +55,7 @@
                     <button type="button" class= "btn btn-default btn-med ResetButton"><span class="glyphicon glyphicon-fast-backward"></button>
                     <button type="button" class= "btn btn-default btn-med BackwardButton"><span class="glyphicon glyphicon-backward"></span></button>
                     
-                    <button type="button" class= "btn btn-default btn-med PlayButton"><span class="glyphicon glyphicon-play"></span></button>
+                    <button type="button" class= "btn btn-default btn-med PlayButton" id = "PlayPauseButton"><span class="glyphicon glyphicon-play"></span></button>
                     <button type="button" class= "btn btn-default btn-med ForwardButton"><span class="glyphicon glyphicon-forward"></span></button>
                     
             <!--        <button type="button" class= "btn btn-default btn-sm FastForwardButton"><span class="glyphicon glyphicon-fast-forward"></span></button>
@@ -66,8 +66,7 @@
            </div>
              <div class="col-md-4 col-xs-4">
                  <ul class="list-group status-short">
-                     <li class="list-group-item lstbox-xs-active" id= "PauseStateIndicator">Pause</li>
-                     <li class="list-group-item lstbox-xs" id= "FixStateIndicator">Fix</li>
+                     <li class="list-group-item lstbox-xs-active" id= "FixStateIndicator">Fix</li>
                      <li class="list-group-item lstbox-xs" id= "EtOHStateIndicator">EtOH</li>
                      <li class="list-group-item lstbox-xs" id= "AcetoneStateIndicator">Acetone</li>
                      <li class="list-group-item lstbox-xs" id= "EndStateIndicator">End</li>
@@ -109,6 +108,19 @@
             <p>
             <div class = "row">
                 <div class="col-md-8 col-xs-8">
+                    <b>Remaining Time</b>
+                </div>
+                <div class = "col-md-4 col-xs-4">
+                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="RemainingTime" value="08:30:00"  ></input>
+                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+                </div>
+            </div>
+            </p>
+            
+            
+            <p>
+            <div class = "row">
+                <div class="col-md-8 col-xs-8">
                     Fix
                 </div>
                 <div class = "col-md-4 col-xs-4">
@@ -141,18 +153,7 @@
                 </div>
             </div>
             </p>
-            
-            <p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    <b>Total time</b>
-                </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="TotalTime" value="08:30:00"  ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                </div>
-            </div>
-            </p>
+           
             
          
         </div>

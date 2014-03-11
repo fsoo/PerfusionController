@@ -6,17 +6,27 @@ import threading
 paused=0;
 
 from datetime import datetime, timedelta;
+from math import ceil,floor;
+
+def ftime(s):
+    hours, remainder = divmod(s, 3600);
+    minutes, seconds = divmod(remainder, 60);
+    return '{:02}:{:02}:{:02}'.format(hours, minutes, seconds)
+
+
 
 class ControllerState :
     
     def __init__(self):
-        self.StartTime=0;
+        self.StartTime= 0 ;
         self.ElapsedTime = timedelta(seconds=0);
+        self.RemainingTime = timedelta(seconds=0);
         self.FixTime = timedelta(seconds = 10);
         self.EtOHTime = timedelta(seconds = 10);
         self.AcetoneTime = timedelta(seconds = 10); # 15 minutes
-        self.CurrentState = "Pause";
-        
+        self.PlayPauseState = "Pause"
+        self.ProcessStep = "Fix";
+            
         
         self.FixFlowRate = 1;
         self.EtOHRinseFlowRate = 10;
@@ -45,13 +55,17 @@ class ControllerState :
         
     def getstate(self):
         self.updatestate();
-        localstate = { 'ElapsedTime': 0,
+        localstate = {
+            'PlayPauseState':"Pause",
+            
+            'ElapsedTime': 0,
+            'RemainingTime': 0,
             'FixTime': 0,
             'EtOHTime': 0,
             'AcetoneTime': 0,
             'ServerTime': 0,
             'ServerTimeString': 'blah',
-            'CurrentState':'blah',
+            'ProcessStep':'blah',
             'FixFlowRate': 0,
             'EtOHRinseFlowRate' : 0,
             'AcetoneRinseFlowRate':0,
@@ -70,12 +84,24 @@ class ControllerState :
 
         }
         
-        localstate['ElapsedTime'] = self.ElapsedTime.seconds;
-        localstate['FixTime']=self.FixTime.seconds;
-        localstate['EtOHTime']=self.EtOHTime.seconds;
-        localstate['AcetoneTime']=self.AcetoneTime.seconds;
+        if(self.Paused):
+            localstate['PlayPauseState'] = "Pause";
+        else:
+            localstate['PlayPauseState'] = "Play";
+        localstate['ElapsedTime'] = ftime(self.ElapsedTime.seconds);
+        remtime =(self.FixTime +self.EtOHTime + self.AcetoneTime - self.ElapsedTime);
+        
+        if remtime < timedelta(seconds = 0):
+            remtime = timedelta(seconds = 0);
+        
+        
+        localstate['RemainingTime'] = ftime(int(ceil(remtime.seconds+float(remtime.microseconds)/10**6)));
+            
+        localstate['FixTime']=ftime(self.FixTime.seconds);
+        localstate['EtOHTime']=ftime(self.EtOHTime.seconds);
+        localstate['AcetoneTime']=ftime(self.AcetoneTime.seconds);
         localstate['ServerTimeString']=datetime.today().strftime("%H:%M:%S");
-        localstate['CurrentState'] = self.CurrentState;
+        localstate['ProcessStep'] = self.ProcessStep;
         
         localstate['FixFlowRate'] = self.FixFlowRate;
         localstate['EtOHRinseFlowRate'] = self.EtOHRinseFlowRate;
@@ -100,57 +126,55 @@ class ControllerState :
         #regardless of paused or unpaused, set the wall clock
         self.ServerTime = datetime.today();
         
-        # if paused, don't do anything
+        # if paused
         if self.Paused:
-            self.CurrentState = "Pause";
-            
-            return
+            self.PlayPauseState = "Pause";
         else:
-            self.ElapsedTime = datetime.today() - self.StartTime;
-            # running a program now - calculate the state from the elapsed time, and over-ride any user state changes
-            # based on elapsed time, figure out which stage we're in (fix, etoh, acetone, wait)
-            if(self.ElapsedTime < self.FixTime): # in fix stage
-                self.CurrentState = "Fix";
-                # no acetone flows in this stage; ETOH gradually approaches 100% of the flow
-                self.AcetoneFlowRate = 0;
-                self.EtOHFlowRate = self.FixFlowRate * float(self.ElapsedTime.seconds) / float(self.FixTime.seconds);
-                self.H2OFlowRate = self.FixFlowRate * (1.0-float(self.ElapsedTime.seconds) / float(self.FixTime.seconds));
-                
-            elif self.ElapsedTime < self.FixTime+self.EtOHTime: # in ETOH stage
-                self.CurrentState = "EtOHRinse";
-                
-                # no acetone or H2O - 100% ethanol at ethanol flow rate
-                self.AcetoneFlowRate = 0;
-                self.H2OFlowRate = 0;
-                self.EtOHFlowRate = self.EtOHRinseFlowRate;
-                
+            self.PlayPauseSTate = "Play";
+            self.ElapsedTime  = datetime.today() - self.StartTime;
+        
+        
+        # running a program now - calculate the state from the elapsed time, and over-ride any user state changes
+        # based on elapsed time, figure out which stage we're in (fix, etoh, acetone, wait)
+        if(self.ElapsedTime < self.FixTime): # in fix stage
+            self.ProcessStep = "Fix";
+            # no acetone flows in this stage; ETOH gradually approaches 100% of the flow
+            self.AcetoneFlowRate = 0;
+            self.EtOHFlowRate = self.FixFlowRate * float(self.ElapsedTime.seconds) / float(self.FixTime.seconds);
+            self.H2OFlowRate = self.FixFlowRate * (1.0-float(self.ElapsedTime.seconds) / float(self.FixTime.seconds));
             
+        elif self.ElapsedTime < self.FixTime+self.EtOHTime: # in ETOH stage
+            self.ProcessStep = "EtOHRinse";
             
-            elif self.ElapsedTime < self.FixTime+self.EtOHTime+self.AcetoneTime: # in acetone stage
-                self.CurrentState = "AcetoneRinse";
-                # no acetone or H2O - 100% ethanol at ethanol flow rate
-                self.AcetoneFlowRate = self.AcetoneRinseFlowRate;
-                self.H2OFlowRate = 0;
-                self.EtOHFlowRate = 0;
+            # no acetone or H2O - 100% ethanol at ethanol flow rate
+            self.AcetoneFlowRate = 0;
+            self.H2OFlowRate = 0;
+            self.EtOHFlowRate = self.EtOHRinseFlowRate;
             
-            else: # after end
-                self.CurrentState = "End";
-                self.H2OFlowRate = 0;
-                self.EtOHFlowRate = 0;
-                self.AcetoneFlowRate = 0;
-    
+        
+        
+        elif self.ElapsedTime < self.FixTime+self.EtOHTime+self.AcetoneTime: # in acetone stage
+            self.ProcessStep = "AcetoneRinse";
+            # no acetone or H2O - 100% ethanol at ethanol flow rate
+            self.AcetoneFlowRate = self.AcetoneRinseFlowRate;
+            self.H2OFlowRate = 0;
+            self.EtOHFlowRate = 0;
+        
+        else: # after end
+            self.ProcessStep = "End";
+            self.H2OFlowRate = 0;
+            self.EtOHFlowRate = 0;
+            self.AcetoneFlowRate = 0;
+
         #calculate valve on and off based on duty cycles
     
         return
-    def play(self):
+    def playpause(self):
         if self.Paused: # record the start time, then set flag to run
             self.StartTime = datetime.today()-self.ElapsedTime;
             self.Paused=False;
-        self.updatestate();
-
-    def pause(self): # set pause flag on
-        if not self.Paused:
-            self.Paused=True;
+        else:
+            self.Paused=True; # pause the process
         self.updatestate();
 
     def reset(self): # set elapsed time to zero, turn on pause flag
@@ -166,14 +190,9 @@ state = ControllerState()
 def getstate():
     return json.dumps(state.getstate())
 
-@app.route('/PerfusionController/PythonServer/play')
-def play():
-    state.play();
-    return json.dumps(state.getstate())
-
-@app.route('/PerfusionController/PythonServer/pause')
-def pause():
-    state.pause();
+@app.route('/PerfusionController/PythonServer/playpause')
+def playpause():
+    state.playpause();
     return json.dumps(state.getstate())
 
 

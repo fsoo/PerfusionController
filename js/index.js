@@ -3,8 +3,7 @@ var REFRESHINTERVAL = 300;
 var state = 1;
 var paused = true;
 var STATEPATH = "/PerfusionController/PythonServer/state.json"
-var PLAYPATH = "/PerfusionController/PythonServer/play"
-var PAUSEPATH = "/PerfusionController/PythonServer/pause"
+var PLAYPAUSEPATH = "/PerfusionController/PythonServer/playpause"
 var RESETPATH = "/PerfusionController/PythonServer/reset"
 
 
@@ -36,13 +35,16 @@ function secstohhmmss(secs)
 function parsestate(rawjsondata)
 {
     var jsondata = JSON.parse(rawjsondata);
+    
+   
+
 
     $('#ServerTime').text(jsondata.ServerTimeString);
     $('#ElapsedTime').val(jsondata.ElapsedTime);
     $('#FixTime').val(jsondata.FixTime);
     $('#EtOHTime').val(jsondata.EtOHTime);
     $('#AcetoneTime').val(jsondata.AcetoneTime);
-    $('#TotalTime').val(jsondata.TotalTime);
+    $('#RemainingTime').val(jsondata.RemainingTime);
   
     // update flow rate progress bars
    
@@ -61,7 +63,13 @@ function parsestate(rawjsondata)
     $('#AcetoneFlowRate').css("width", String(jsondata.AcetoneFlowRate / jsondata.AcetoneRinseFlowRate * 100)+"%");
     $('#AcetoneFlowRateText').html("Acetone "+String(jsondata.AcetoneFlowRate)+" mL/min");
     
+   
+    if(jsondata.PlayPauseState == "Play")
+        $('#PlayPauseButton').html("<span class=\"glyphicon glyphicon-pause\"></span>");
+    else
+        $('#PlayPauseButton').html("<span class=\"glyphicon glyphicon-play\"></span>");
     
+
     // clear state indicators and update
     $('#PauseStateIndicator').removeClass('lstbox-xs-active').addClass('lstbox-xs');
     $('#FixStateIndicator').removeClass('lstbox-xs-active').addClass('lstbox-xs');
@@ -69,11 +77,8 @@ function parsestate(rawjsondata)
     $('#AcetoneStateIndicator').removeClass('lstbox-xs-active').addClass('lstbox-xs');
     $('#EndStateIndicator').removeClass('lstbox-xs-active').addClass('lstbox-xs');
     
-    switch (jsondata.CurrentState)
+    switch (jsondata.ProcessStep)
     {
-        case "Pause":
-            $('#PauseStateIndicator').removeClass('lstbox-xs').addClass('lstbox-xs-active');
-            break;
         case "Fix":
             $('#FixStateIndicator').removeClass('lstbox-xs').addClass('lstbox-xs-active');
             break;
@@ -144,26 +149,12 @@ jQuery(function($){
        
        $(".PlayButton").click(function() {
                               
-                              if($(this).html()==="<span class=\"glyphicon glyphicon-play\"></span>")
-                              {
-                              paused = false;
-                              $(this).html("<span class=\"glyphicon glyphicon-pause\"></span>" );
-                              $.get(PLAYPATH,function(data,status){
+                              $.get(PLAYPAUSEPATH,function(data,status){
                                     s= parsestate(data);
                                     });
-                              
-                              
-                              }
-                              else
-                              {
-                              paused = true;
-                              $(this).html("<span class=\"glyphicon glyphicon-play\">");
-                              $.get(PAUSEPATH,function(data,status){
-                                    s= parsestate(data);
-                                    });
-                              
-                              }
                               });
+                              
+                              
        
        $(".ResetButton").click(function() {
                                paused = true;

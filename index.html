@@ -76,101 +76,140 @@
              
                 </div>
         </div>
+
+        <p></p>
         <div class = "row">
             <div class="col-md-8 col-xs-6">
-                Preset
+                Elapsed time (hh:mm:ss)
             </div>
-            <div class = "col-md-6 col-xs-6">
-                <select class="form-control btn-xs btn-primary btn-block" id="Preset">
-                    1 mL/min<span class="caret"></span>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><option selected="selected">Human</option></li>
-                        <li><option>Mouse</option></li>
-                        <li><option>New Preset</option></li>
-                        
-                    </ul>
-                </select>     </div>
+            <div class = "col-md-4 col-xs-6">
+                <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="ElapsedTime" value="01:00:00"  ></input>
+                <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+            </div>
         </div>
-        <p></p>
-        <div class="col-md-4 col-xs-12 myshow">
+        </p>
+
+        <p>
+        <div class = "row">
+            <div class="col-md-8 col-xs-6">
+                <b>Remaining Time</b>
+            </div>
+            <div class = "col-md-4 col-xs-6">
+                <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="RemainingTime" value="08:30:00"  ></input>
+                <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+            </div>
+        </div>
+        </p>
+
+
+        <p>
+
+        <div class = "row">
             <p></p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    Elapsed time (hh:mm:ss)
+            <div class="col-md-4 col-xs-12 myshow">
+                <div class = "row">
+                    <p>
+                    <div class="col-md-8 col-xs-6">
+                        Preset
+                    </div>
+                    <div class = "col-md-6 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" id="Preset">
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><option selected="selected">Human</option></li>
+                                <li><option>Mouse</option></li>
+                                
+                            </ul>
+                        </select>
+                    </div>
+                    </p>
+                    </div>
+                <div class = "row">
+                    <p>
+
+                    <div class="col-md-8 col-xs-6">
+                        Fix
+                    </div>
+                    <div class = "col-md-4 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" id="FixTime">0:00:00<span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><option selected = "selected" value ="01:00:00">1:00:00</option></li>
+                                <li><option value = "02:00:00">2:00:00</option></li>
+                                <li><option value = "04:00:00">4:00:00</option></li>
+                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
+                            </ul>
+                        </select>
+                        
+                        
+                        
+                        <!-- <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="FixTime" value="08:00:00"   ></input> -->
+                        <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+                    </div>
+                    </div>
+                </p>
+                
+               
+                <p>
+                <div class = "row">
+                    <div class="col-md-8 col-xs-6">
+                        EtOH
+                    </div>
+                    <div class = "col-md-4 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" id="EtOHTime">0:00:00<span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><option selected = "selected" value ="00:00:00">0:00:00</option></li>
+                                <li><option value = "00:10:00">0:10:00</option></li>
+                                <li><option value = "00:30:00">0:30:00</option></li>
+                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
+                            </ul>
+                        </select>
+                        
+                        
+                        
+                        
+                        <!--       <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="EtOHTime" value="00:15:00"  ></input> -->
+                        <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+                    </div>
                 </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="ElapsedTime" value="01:00:00"  ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
+                </p>
+                
+                <p>
+                <div class = "row">
+                    <div class="col-md-8 col-xs-6">
+                        Acetone
+                    </div>
+                    <div class = "col-md-4 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" id="AcetoneTime">0:00:00<span class="caret"></span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><option selected = "selected" value ="00:00:00">0:00:00</option></li>
+                                <li><option value = "00:10:00">0:10:00</option></li>
+                                <li><option value = "00:30:00">0:30:00</option></li>
+                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
+                            </ul>
+                        </select>
+                    </div>
+                    
+                    
                 </div>
-            </div>
-            </p>
-            
-            <p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    <b>Remaining Time</b>
-                </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="RemainingTime" value="08:30:00"  ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                </div>
-            </div>
-            </p>
-            
-            
-            <p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    Fix
-                </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="FixTime" value="08:00:00"   ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                </div>
-            </div>
-            </p>
-            
-            <p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    EtOH
-                </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="EtOHTime" value="00:15:00"  ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                </div>
-            </div>
-            </p>
-            
-            <p>
-            <div class = "row">
-                <div class="col-md-8 col-xs-8">
-                    Acetone
-                </div>
-                <div class = "col-md-4 col-xs-4">
-                    <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="AcetoneTime" value="00:15:00"  ></input>
-                    <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                </div>
-            </div>
-            </p>
-           
-            
+                </p>
+                
+                
          
         </div>
         <div class="col-md-4 col-xs-12 myshow">
             <p>
             <div class = "row">
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-8 col-xs-6">
                     Fix flow rate
                 </div>
-                <div class = "col-md-4 col-xs-4">
+                <div class = "col-md-4 col-xs-6">
                     <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
                         1 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
-                            <li><option selected="selected">1mL/min</option></li>
-                            <li><option>2mL/min</option></li>
-                            <li><option>5mL/min</option></li>
-                            <li><option>10mL/min</option></li>
+                            <li><option selected="selected" value ="1">1mL/min</option></li>
+                            <li><option value ="2">2mL/min</option></li>
+                            <li><option value ="5">5mL/min</option></li>
+                            <li><option value ="10">10mL/min</option></li>
                         </ul>
                     </select>
                     
@@ -180,17 +219,17 @@
             
             <p>
             <div class = "row">
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-8 col-xs-6">
                     EtOH rinse flow rate
                 </div>
-                <div class = "col-md-4 col-xs-4">
+                <div class = "col-md-4 col-xs-6">
                     <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate" value="10 mL/min">
                         <span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
-                            <li><option>1mL/min</option></li>
-                            <li><option>2mL/min</option></li>
-                            <li><option>5mL/min</option></li>
-                            <li><option selected ="selected">10mL/min</option></li>
+                            <li><option selected="selected" value ="1">1mL/min</option></li>
+                            <li><option value ="2">2mL/min</option></li>
+                            <li><option value ="5">5mL/min</option></li>
+                            <li><option value ="10">10mL/min</option></li>
                         </ul>
                     </select>
                     
@@ -199,17 +238,17 @@
             </p>
             <p>
             <div class = "row">
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-8 col-xs-6">
                     Acetone flow rate
                 </div>
-                <div class = "col-md-4 col-xs-4">
+                <div class = "col-md-4 col-xs-6">
                     <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
                         10 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
-                            <li><option>1mL/min</option></li>
-                            <li><option>2mL/min</option></li>
-                            <li><option>5mL/min</option></li>
-                            <li><option selected ="selected">10mL/min</option></li>
+                            <li><option selected="selected" value ="1">1mL/min</option></li>
+                            <li><option value ="2">2mL/min</option></li>
+                            <li><option value ="5">5mL/min</option></li>
+                            <li><option value ="10">10mL/min</option></li>
                         </ul>
                     </select>
                     
@@ -219,15 +258,15 @@
             
             <p>
             <div class = "row">
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-8 col-xs-6">
                     Stirbar
                 </div>
-                <div class = "col-md-4 col-xs-4">
+                <div class = "col-md-4 col-xs-6">
                     <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
                         1 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
-                            <li><option selected = "selected">On</option></li>
-                            <li><option>Off</option></li>
+                            <li><option selected = "selected" value = 1>On</option></li>
+                            <li><option value = 0>Off</option></li>
                          </ul>
                     </select>
                     
@@ -238,10 +277,10 @@
 
             <div class="row">
                 
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-8 col-xs-6">
                     Alert email
                 </div>
-                <div class = "col-md-4 col-xs-4">
+                <div class = "col-md-4 col-xs-6">
                     <button type="button" class= "btn btn-xs btn-primary btn-block">Yes</button>
                 </div>
             </div>

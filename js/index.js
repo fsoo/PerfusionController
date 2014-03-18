@@ -127,11 +127,11 @@ jQuery(function($){
            },REFRESHINTERVAL);
        
        
-       $('#ElapsedTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#FixTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#EtOHTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#AcetoneTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
-       $('#TotalTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+   //    $('#ElapsedTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+     //  $('#FixTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+     //  $('#EtOHTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+     //  $('#AcetoneTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
+     //  $('#TotalTime').mask('99:z9:z9',{translation: {'z':{pattern:/[0-5]/}}})
        
        
        

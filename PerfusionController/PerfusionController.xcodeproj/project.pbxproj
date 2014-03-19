@@ -16,6 +16,10 @@
 		78776BA718C147A10016FE11 /* index2.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index2.html; path = ../index2.html; sourceTree = "<group>"; };
 		78776BA918C4B6320016FE11 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.js; path = ../js/index.js; sourceTree = "<group>"; };
 		78776BAD18C4D4980016FE11 /* jquery.mask.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = jquery.mask.js; path = ../js/jquery.mask.js; sourceTree = "<group>"; };
+		78AD4DCC18D91C5500C55834 /* run.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = run.py; path = ../PythonServer/run.py; sourceTree = "<group>"; };
+		78AD4DCD18D91D8900C55834 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = ../PythonServer/templates/index.html; sourceTree = "<group>"; };
+		78AD4DCE18D91E0B00C55834 /* views.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = views.py; path = ../PythonServer/views.py; sourceTree = "<group>"; };
+		78AD4DCF18D920AB00C55834 /* controller.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = controller.py; path = ../PythonServer/controller.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -26,6 +30,10 @@
 				78776BA918C4B6320016FE11 /* index.js */,
 				786355DE18C51BB000818957 /* Cochlear_Siegfried_nginx.conf */,
 				78776BA218C0DD080016FE11 /* hellotest.py */,
+				78AD4DCE18D91E0B00C55834 /* views.py */,
+				78AD4DCF18D920AB00C55834 /* controller.py */,
+				78AD4DCD18D91D8900C55834 /* index.html */,
+				78AD4DCC18D91C5500C55834 /* run.py */,
 				78776BA618C0E2170016FE11 /* startUWSGI.sh */,
 				78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */,
 				78776BA418C0DE370016FE11 /* uwsgi.ini */,

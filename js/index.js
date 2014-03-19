@@ -5,7 +5,7 @@ var paused = true;
 var STATEPATH = "/PerfusionController/PythonServer/state.json"
 var PLAYPAUSEPATH = "/PerfusionController/PythonServer/playpause"
 var RESETPATH = "/PerfusionController/PythonServer/reset"
-
+var UPDATEPATH = "/PerfusionController/PythonServer/updateparameters"
 
 function refresh()
 {
@@ -113,6 +113,19 @@ function getUpdatedState()
           });
     
     return s;
+    
+}
+
+
+function updateParameters()
+{
+    var s;
+    $.get(UPDATEPATH,function(data,status){
+          s= parsestate(data);
+          });
+    
+    return s;
+    
     
 }
 

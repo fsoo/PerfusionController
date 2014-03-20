@@ -1,3 +1,8 @@
+from flask import render_template
+from flask_wtf import Form
+from wtforms import SelectField
+from flask import request
+
 from hellotest import app
 from controller import state
 import json
@@ -18,7 +23,27 @@ def reset():
     return json.dumps(state.getstate())
 
 
-@app.route('/PerfusionController/PythonServer/updateparameters')
+# forms handling
+
+
+
+class ProcessTimeForm(Form):
+    timing = SelectField(u'Time',choices=[{'3600','1:00:00','3600','1:00:00','3600','1:00:00','3600','1:00:00'}]);
+
+
+@app.route('/PerfusionController/PythonServer/forms')
+def fixtimeform():
+    return  json.dumps(state.render_templates());
+
+
+@app.route('/PerfusionController/PythonServer/updateparameters', methods =['POST', 'GET'])
 def setparameters():
-    state.updateparameters();
+    print request.form;
+    state.setparameters(request.form);
+    #form = ProcessTimeForm();
+    #print form;
+    #if request.method == 'POST' and form.validate():
+    #   return json.dumps(state.getstate());
+       
     return json.dumps(state.getstate())
+

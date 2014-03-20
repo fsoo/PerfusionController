@@ -1,12 +1,20 @@
 import json;
 from datetime import datetime, timedelta;
 from math import ceil,floor;
+from flask import render_template
 
 def ftime(s):
     hours, remainder = divmod(s, 3600);
     minutes, seconds = divmod(remainder, 60);
     return '{:02}:{:02}:{:02}'.format(hours, minutes, seconds)
 
+
+
+MAXFIXTIME = 24*60*60 #won't fix for more than 24 hours
+MAXETOHTIME = 24*60*60 #don't ETOH for more than 24 hour
+MAXACETONETIME = 24*60*60 #don't ETOH for more than 24 hour
+
+MAXFLOWRATE = 10 # 10 ml/min
 
 
 class ControllerState :
@@ -25,7 +33,7 @@ class ControllerState :
         self.FixFlowRate = 1;
         self.EtOHRinseFlowRate = 10;
         self.AcetoneRinseFlowRate = 10;
-        self.Stirbar = 0;
+        self.StirBar = 0;
         self.AlertEmail = "";
         
         self.H2OFlowRate = 0; # ml/min
@@ -91,16 +99,16 @@ class ControllerState :
         
         localstate['RemainingTime'] = ftime(int(ceil(remtime.seconds+float(remtime.microseconds)/10**6)));
         
-        localstate['FixTime']=ftime(self.FixTime.seconds);
-        localstate['EtOHTime']=ftime(self.EtOHTime.seconds);
-        localstate['AcetoneTime']=ftime(self.AcetoneTime.seconds);
+        localstate['FixTime']=self.FixTime.seconds;
+        localstate['EtOHTime']=self.EtOHTime.seconds;
+        localstate['AcetoneTime']=self.AcetoneTime.seconds;
         localstate['ServerTimeString']=datetime.today().strftime("%H:%M:%S");
         localstate['ProcessStep'] = self.ProcessStep;
         
         localstate['FixFlowRate'] = self.FixFlowRate;
         localstate['EtOHRinseFlowRate'] = self.EtOHRinseFlowRate;
         localstate['AcetoneRinseFlowRate'] = self.AcetoneRinseFlowRate;
-        localstate['StirBar'] = self.Stirbar;
+        localstate['StirBar'] = self.StirBar;
         localstate['H2OFlowRate'] = self.H2OFlowRate;
         localstate['EtOHFlowRate'] = self.EtOHFlowRate;
         localstate['AcetoneFlowRate'] = self.AcetoneFlowRate;
@@ -177,8 +185,57 @@ class ControllerState :
         self.StartTime=datetime.today();
         self.updatestate();
     
-    def updateparameters(self):
-        print("updating parameters!");
+    def setparameters(self, parameters):
+        
+        p=parameters.get('name');
+        value=int(parameters.get('value'));
+        print "received message, set "+p+" to " +repr(value);
+
+        if p==u'FixTime':
+            if value >= 0 and value < MAXFIXTIME:
+                print "setting "+p+" to "+repr(value);
+                self.FixTime = timedelta(seconds=value);
+        elif p==u'EtOHTime':
+            if value >= 0 and value < MAXETOHTIME:
+                self.EtOHTime = timedelta(seconds=value);
+        elif p==u'AcetoneTime':
+            if value >= 0 and value < MAXETOHTIME:
+                self.AcetoneTime = timedelta(seconds=value);
+
+
+        elif p==u'FixFlowRate':
+            if value >= 0 and value < MAXFLOWRATE:
+                print "setting "+p+" to "+repr(value);
+                self.FixFlowRate = value;
+        elif p==u'EtOHRinseFlowRate':
+            if value >= 0 and value < MAXFLOWRATE:
+                self.EtOHRinseFlowRate = value;
+        elif p==u'AcetoneFlowRate':
+            if value >= 0 and value < MAXFLOWRATE:
+                self.AcetoneRinseFlowRate= value;
+
+        elif p==u'StirBar':
+            if value >= 0 and value <=1:
+                print "setting "+p+" to "+repr(value);
+                
+                self.StirBar= value;
+
+
+        self.updatestate();
+
+
+    def render_templates(self):
+        
+        localstate = {
+            'FixTime': 0,
+            'EtOHTime': 0,
+            'AcetoneTime': 0,
+        
+        };
+        localstate['FixTime']= render_template("templates.html");
+        localstate['EtOHTime']= render_template("templates.html");
+        localstate['AcetoneTime']= render_template("templates.html");
+        return localstate
 
 
 state = ControllerState()

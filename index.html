@@ -17,7 +17,7 @@
                          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
                          <![endif]-->
                         </head>
-    <body>
+    <body onload="loadDynamicContent()">
     
         
 
@@ -118,82 +118,40 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><option selected="selected">Human</option></li>
                                 <li><option>Mouse</option></li>
-                                
                             </ul>
                         </select>
                     </div>
                     </p>
-                    </div>
+                </div>
+                
                 <div class = "row">
                     <p>
-                    <form name = "FixTimeForm" action = "" method = "get" >
-                    <div class="col-md-8 col-xs-6">
-                        Fix
+                    <div class="col-md-8 col-xs-6">Fix</div>
+                    <div  class="col-md-4 col-xs-6">
+                    <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="FixTime" >0:00:00<span class="caret"></span>
+                    </select>
                     </div>
-                    <div class = "col-md-4 col-xs-6">
-                        <select class="form-control btn-xs btn-primary btn-block" id="FixTime" onChange = "updateParameters()" >0:00:00<span class="caret"></span>
-                            <ul class="dropdown-menu" role="menu" >
-                                <li><option selected = "selected" value ="01:00:00">1:00:00</option></li>
-                                <li><option value = "02:00:00">2:00:00</option></li>
-                                <li><option value = "04:00:00">4:00:00</option></li>
-                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
-                            </ul>
-                        </select>
-                        
-                        
-                        
-                        <!-- <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="FixTime" value="08:00:00"   ></input> -->
-                        <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                    </div>
-                    </div>
-                    </form>
-                </p>
-                
-               
-                <p>
-                <div class = "row">
-                    <div class="col-md-8 col-xs-6">
-                        EtOH
-                    </div>
-                    <div class = "col-md-4 col-xs-6">
-                        <select class="form-control btn-xs btn-primary btn-block" id="EtOHTime">0:00:00<span class="caret"></span>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><option selected = "selected" value ="00:00:00">0:00:00</option></li>
-                                <li><option value = "00:10:00">0:10:00</option></li>
-                                <li><option value = "00:30:00">0:30:00</option></li>
-                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
-                            </ul>
-                        </select>
-                        
-                        
-                        
-                        
-                        <!--       <input type="text"  class= "btn-xs btn-primary btn-block" style="text-align:center" id="EtOHTime" value="00:15:00"  ></input> -->
-                        <!--            <button type="button" class= "btn btn-xs btn-primary btn-block">1:00:59</button>  -->
-                    </div>
+                    </p>
                 </div>
-                </p>
-                
-                <p>
                 <div class = "row">
-                    <div class="col-md-8 col-xs-6">
-                        Acetone
-                    </div>
-                    <div class = "col-md-4 col-xs-6">
-                        <select class="form-control btn-xs btn-primary btn-block" id="AcetoneTime">0:00:00<span class="caret"></span>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><option selected = "selected" value ="00:00:00">0:00:00</option></li>
-                                <li><option value = "00:10:00">0:10:00</option></li>
-                                <li><option value = "00:30:00">0:30:00</option></li>
-                                <li><option value = "00:00:10">0:00:10 (test)</option></li>
-                            </ul>
+                    <p>
+                    <div class="col-md-8 col-xs-6">EtOH</div>
+                    <div class="col-md-4 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="EtOHTime" >0:00:00<span class="caret"></span>
                         </select>
                     </div>
-                    
-                    
+                    </p>
                 </div>
+                <div class = "row">
+                    <p>
+                    <div class="col-md-8 col-xs-6">Acetone</div>
+                    <div class="col-md-4 col-xs-6">
+                        <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="AcetoneTime" >0:00:00<span class="caret"></span>
+                        </select></div>
+                    </p>
+                </div>
+                <p>
                 </p>
-                
                 
          
         </div>
@@ -204,7 +162,7 @@
                     Fix flow rate
                 </div>
                 <div class = "col-md-4 col-xs-6">
-                    <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
+                    <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="FixFlowRate">
                         1 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
                             <li><option selected="selected" value ="1">1mL/min</option></li>
@@ -224,7 +182,7 @@
                     EtOH rinse flow rate
                 </div>
                 <div class = "col-md-4 col-xs-6">
-                    <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate" value="10 mL/min">
+                    <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="EtOHRinseFlowRate" value="10 mL/min">
                         <span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
                             <li><option selected="selected" value ="1">1mL/min</option></li>
@@ -243,7 +201,7 @@
                     Acetone flow rate
                 </div>
                 <div class = "col-md-4 col-xs-6">
-                    <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
+                    <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="AcetoneFlowRate">
                         10 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
                             <li><option selected="selected" value ="1">1mL/min</option></li>
@@ -263,7 +221,7 @@
                     Stirbar
                 </div>
                 <div class = "col-md-4 col-xs-6">
-                    <select class="form-control btn-xs btn-primary btn-block" id="FixFlowRate">
+                    <select class="form-control btn-xs btn-primary btn-block" onChange = "updateParameters(this)" id="StirBar">
                         1 mL/min<span class="caret"></span>
                         <ul class="dropdown-menu" role="menu">
                             <li><option selected = "selected" value = 1>On</option></li>

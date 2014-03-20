@@ -7,6 +7,9 @@ var PLAYPAUSEPATH = "/PerfusionController/PythonServer/playpause"
 var RESETPATH = "/PerfusionController/PythonServer/reset"
 var UPDATEPATH = "/PerfusionController/PythonServer/updateparameters"
 
+// forms
+var FORMPATH="/PerfusionController/PythonServer/forms"
+
 function refresh()
 {
     
@@ -45,7 +48,8 @@ function parsestate(rawjsondata)
     $('#EtOHTime').val(jsondata.EtOHTime);
     $('#AcetoneTime').val(jsondata.AcetoneTime);
     $('#RemainingTime').val(jsondata.RemainingTime);
-  
+    $('#StirBar').val(jsondata.StirBar);
+    
     // update flow rate progress bars
    
     $('#H2OFlowRate').css("width", String(jsondata.H2OFlowRate / jsondata.FixFlowRate * 100)+"%");
@@ -117,19 +121,31 @@ function getUpdatedState()
 }
 
 
-function updateParameters()
+function updateParameters(sender)
 {
+    
     var s;
-    $.get(UPDATEPATH,function(data,status){
+    $.post(UPDATEPATH, {name: sender.id, value: sender.value},
+          function(data,status){
           s= parsestate(data);
           });
     
     return s;
-    
-    
 }
 
 
+function loadDynamicContent()
+{
+
+    $.get(FORMPATH,function(rawjsondata,status){
+          var jsondata = JSON.parse(rawjsondata);
+          $('#FixTime').html(jsondata.FixTime);
+          $('#EtOHTime').html(jsondata.EtOHTime);
+          $('#AcetoneTime').html(jsondata.AcetoneTime);
+          
+          
+          });
+}
 
 jQuery(function($){
        refresh();

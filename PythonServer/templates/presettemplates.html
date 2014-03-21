@@ -1,0 +1,6 @@
+<span class="caret"></span>
+<ul class="dropdown-menu" role="menu">
+    {% for preset in presets %}
+    <li><option {% if preset == currentpreset %} selected{% endif %}>{{preset}}</option></li>
+    {% endfor %}
+</ul>

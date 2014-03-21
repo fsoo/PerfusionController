@@ -40,10 +40,14 @@ def fixtimeform():
 def setparameters():
     print request.form;
     state.setparameters(request.form);
-    #form = ProcessTimeForm();
-    #print form;
-    #if request.method == 'POST' and form.validate():
-    #   return json.dumps(state.getstate());
-       
+    
     return json.dumps(state.getstate())
 
+@app.route('/PerfusionController/PythonServer/preset', methods =['POST', 'GET'])
+def setpreset():
+    state.processpresetmessage(request.form);
+    return json.dumps(state.getstate())
+
+@app.route('/PerfusionController/PythonServer/presetselector')
+def presetselector():
+    return  json.dumps(state.render_presetselector());

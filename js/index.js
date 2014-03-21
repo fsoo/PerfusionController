@@ -6,7 +6,8 @@ var STATEPATH = "/PerfusionController/PythonServer/state.json"
 var PLAYPAUSEPATH = "/PerfusionController/PythonServer/playpause"
 var RESETPATH = "/PerfusionController/PythonServer/reset"
 var UPDATEPATH = "/PerfusionController/PythonServer/updateparameters"
-
+var PRESETPATH = "/PerfusionController/PythonServer/preset"
+var PRESETSELECTORPATH="/PerfusionController/PythonServer/presetselector"
 // forms
 var FORMPATH="/PerfusionController/PythonServer/forms"
 
@@ -69,10 +70,14 @@ function parsestate(rawjsondata)
     
    
     if(jsondata.PlayPauseState == "Play")
+    {
         $('#PlayPauseButton').html("<span class=\"glyphicon glyphicon-pause\"></span>");
+        
+    }
     else
+    {
         $('#PlayPauseButton').html("<span class=\"glyphicon glyphicon-play\"></span>");
-    
+    }
 
     // clear state indicators and update
     $('#PauseStateIndicator').removeClass('lstbox-xs-active').addClass('lstbox-xs');
@@ -102,6 +107,66 @@ function parsestate(rawjsondata)
             
             
     }
+    
+    //open closed buttons
+    if(jsondata.H2OValveOpen == 1)
+    {
+        test = $('#H2OValveOpen').text();
+        $('#H2OValveOpen').text("Open");
+        $('#H2OValveOpen').val("1");
+        
+    }
+    else
+    {
+        $('#H2OValveOpen').text("Closed");
+        $('#H2OValveOpen').val("0");
+
+    }
+
+    //open closed buttons
+    if(jsondata.EtOHValveOpen == 1)
+    {
+        $('#EtOHValveOpen').text("Open");
+        $('#EtOHValveOpen').val("1");
+        
+    }
+    else
+    {
+        $('#EtOHValveOpen').text("Closed");
+        $('#EtOHValveOpen').val("0");
+        
+    }
+
+    
+    //open closed buttons
+    if(jsondata.AcetoneValveOpen == 1)
+    {
+        $('#AcetoneValveOpen').text("Open");
+        $('#AcetoneValveOpen').val("1");
+        
+    }
+    else
+    {
+        $('#AcetoneValveOpen').text("Closed");
+        $('#AcetoneValveOpen').val("0");
+        
+    }
+    
+    //open closed buttons
+    if(jsondata.WasteValveOpen == 1)
+    {
+        $('#WasteValveOpen').text("Open");
+        $('#WasteValveOpen').val("1");
+        
+    }
+    else
+    {
+        $('#WasteValveOpen').text("Closed");
+        $('#WasteValveOpen').val("0");
+        
+    }
+
+    
     
     
     return jsondata;
@@ -133,6 +198,49 @@ function updateParameters(sender)
     return s;
 }
 
+function updatePreset(sender)
+{
+    // if saving preset, prompt
+    var s;
+    var r;
+    switch (sender.id)
+    {
+        case "PresetSelector":
+            r = sender.value;
+            break;
+        case "AddPresetButton":
+            r =  prompt("Please enter the name of the preset:","Preset");
+            break;
+        case "SavePresetButton":
+            r = confirm("Save current preset?");
+            break;
+        case "RemovePresetButton":
+            r = confirm("Delete current preset?");
+            break;
+    }
+    
+    if(r != null)
+    var s;
+    $.post(PRESETPATH, {name: sender.id, value: r},
+           function(data,status){
+           s= parsestate(data);
+           });
+    updatePresetSelector();
+}
+
+function updatePresetSelector()
+{
+    var s;
+    $.get(PRESETSELECTORPATH,function(rawjsondata,status){
+          var jsondata = JSON.parse(rawjsondata);
+          $('#PresetSelector').html(jsondata.PresetSelector);
+          });
+    
+    
+    
+    return s;
+    
+}
 
 function loadDynamicContent()
 {
@@ -145,6 +253,8 @@ function loadDynamicContent()
           
           
           });
+    
+    updatePresetSelector();
 }
 
 jQuery(function($){
@@ -165,16 +275,16 @@ jQuery(function($){
        
        
        
-       $(".OpenCloseButton").click(function() {
-                                   if($(this).text()=="Closed")
-                                   {
-                                   $(this).text("Open");
-                                   }
-                                   else
-                                   {
-                                   $(this).text("Closed");
-                                   }
-                                   });
+  //     $(".OpenCloseButton").click(function() {
+    //                               if($(this).text()=="Closed")
+      //                             {
+        //                           $(this).text("Open");
+          //                         }
+            //                       else
+              //                     {
+                //                   $(this).text("Closed");
+                  //                 }
+                    //               });
        
        $(".PlayButton").click(function() {
                               

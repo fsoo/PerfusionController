@@ -1,4 +1,6 @@
 import json;
+import pickle;
+import sys;
 from datetime import datetime, timedelta;
 from math import ceil,floor;
 from flask import render_template
@@ -15,6 +17,7 @@ MAXETOHTIME = 24*60*60 #don't ETOH for more than 24 hour
 MAXACETONETIME = 24*60*60 #don't ETOH for more than 24 hour
 
 MAXFLOWRATE = 10 # 10 ml/min
+PRESETFILE = "presets"
 
 
 class ControllerState :
@@ -54,7 +57,120 @@ class ControllerState :
         self.Valvecycletime = 10; # 10 seconds
         self.Paused = True; # starts by not running
         self.ServerTime = datetime.today().strftime("HH:MM:SS"); # initialize to local time
+ 
+        # load presets
+        self.loadpresets(PRESETFILE);
+ 
+
+
+
+    def loadpresets(self, pfile):
+        # load presets from file
+        self.CurrentPreset = '';
+        self.Presets={};
+            
+        try:
+            with open(pfile, 'r') as f:
+                self.Presets = pickle.load(f);
+            print "Loaded presets:" + repr(self.Presets);
+
+        except IOError as e:
+            print "Error loading presets file " + pfile + ": "+ repr(e);
+        except EOFError as e:
+            print "Error reading from presets file " + pfile +": "+repr(e);
+        except:
+            print "Unexpected error when loading presets file " + pfile + ":", sys.exc_info()[0]
+            raise
     
+        if(len(self.Presets)>0):
+            self.CurrentPreset = self.Presets.keys()[0] # default to first preset in the list
+            self.CurrentPResetModified=False;
+
+    def savepresets(self, pfile):
+        with open(pfile,'w') as f:
+            pickle.dump(self.Presets,f);
+    
+    def getpresets(self):
+        return self.Presets.keys();
+
+    def getcurrentpreset(self):
+        return self.CurrentPreset;
+
+    def getcurrentpresetmodified(self):
+        return self.CurrentPresetModified;
+
+
+    def savecurrentpreset(self):
+        # save values to preset
+        p = {'FixTime':self.FixTime,
+            'FixFlowRate':self.FixFlowRate,
+            'EtOHTime':self.EtOHTime,
+            'EtOHRinseFlowRate':self.EtOHRinseFlowRate,
+            'AcetoneTime':self.AcetoneTime,
+            'AcetoneRinseFlowRate':self.AcetoneRinseFlowRate}
+        self.Presets[self.CurrentPreset] = p;
+        self.savepresets(PRESETFILE);
+
+    def deletecurrentpreset(self):
+        if self.Presets.has_key(self.CurrentPreset):
+            del self.Presets[self.CurrentPreset];
+            if len(self.Presets)>0:
+                self.CurrentPreset = self.Presets.keys()[0]
+            else:
+                self.CurrentPreset = '';
+        self.savepresets(PRESETFILE);
+        #otherwise don't do anything
+
+
+    def addpreset(self,presetname):
+        self.Presets[presetname] ={};
+        self.CurrentPreset=presetname;
+        self.savecurrentpreset()
+    
+    def setcurrentpreset(self,presetname):
+        if self.Presets.has_key(presetname):
+            self.CurrentPreset=presetname;
+            p = self.Presets[presetname]
+            self.FixTime = p['FixTime'];
+            self.FixFlowRate = p['FixFlowRate'];
+            self.EtOHTime = p['EtOHTime'];
+            self.EtOHFlowRate = p['EtOHRinseFlowRate'];
+            self.AcetoneTime = p['AcetoneTime'];
+            self.AcetoneFlowRate = p['AcetoneRinseFlowRate'];
+            self.currentPresetModfied = False;
+
+    def markpresetmodified(self):
+            self.currentPresetModified=True;
+
+    def render_presetselector(self):
+        localstate = {
+            'PresetSelector': 0,
+                };
+        localstate['PresetSelector']= render_template("presettemplates.html", presets=self.getpresets(), currentpreset = self.getcurrentpreset());
+        return localstate
+
+
+    def processpresetmessage(self, message):
+        p=message.get('name');
+        value=message.get('value');
+        
+        print "received preset message from: "+p+", value: " +repr(value);
+        
+        if p==u'PresetSelector':
+            self.setcurrentpreset(value);
+        elif p==u'AddPresetButton':
+            self.addpreset(value);
+        elif p==u'SavePresetButton':
+            self.savecurrentpreset();
+        elif p==u'RemovePresetButton':
+            self.deletecurrentpreset();
+        
+        self.updatestate();
+
+
+
+
+
     def getstate(self):
         self.updatestate();
         localstate = {
@@ -82,7 +198,7 @@ class ControllerState :
             'H2OLevel':0,
             'EtOHLevel':0,
             'AcetoneLevel':0,
-            'WasteLevel':0
+            'WasteLevel':0,
         
         }
         
@@ -109,9 +225,9 @@ class ControllerState :
         localstate['EtOHRinseFlowRate'] = self.EtOHRinseFlowRate;
         localstate['AcetoneRinseFlowRate'] = self.AcetoneRinseFlowRate;
         localstate['StirBar'] = self.StirBar;
-        localstate['H2OFlowRate'] = self.H2OFlowRate;
-        localstate['EtOHFlowRate'] = self.EtOHFlowRate;
-        localstate['AcetoneFlowRate'] = self.AcetoneFlowRate;
+        localstate['H2OFlowRate'] = round(self.H2OFlowRate * 10.0)/10;
+        localstate['EtOHFlowRate'] = round(self.EtOHFlowRate * 10.0)/10.0;
+        localstate['AcetoneFlowRate'] = round(self.AcetoneFlowRate *10.0)/10.0;
         localstate['H2OValveOpen'] = self.H2OValveOpen;
         localstate['EtOHValveOpen'] = self.EtOHValveOpen;
         localstate['AcetoneValveOpen'] = self.AcetoneValveOpen;
@@ -132,7 +248,7 @@ class ControllerState :
         if self.Paused:
             self.PlayPauseState = "Pause";
         else:
-            self.PlayPauseSTate = "Play";
+            self.PlayPauseState = "Play";
             self.ElapsedTime  = datetime.today() - self.StartTime;
         
         
@@ -168,7 +284,8 @@ class ControllerState :
             self.EtOHFlowRate = 0;
             self.AcetoneFlowRate = 0;
         
-        #calculate valve on and off based on duty cycles
+        #calculate valve on and off based on duty cycles and if in play-pause state
+
         
         return
     def playpause(self):
@@ -188,38 +305,95 @@ class ControllerState :
     def setparameters(self, parameters):
         
         p=parameters.get('name');
+            # stringparametergroup = [u'H2OValveOpen',u'EtOHValveOpen',u'AcetoneValveOpen'];
+        
+        # if p in stringparametergroup:
+        #    value = parameters.get('value');
+        #else:
         value=int(parameters.get('value'));
+
         print "received message, set "+p+" to " +repr(value);
 
         if p==u'FixTime':
             if value >= 0 and value < MAXFIXTIME:
                 print "setting "+p+" to "+repr(value);
                 self.FixTime = timedelta(seconds=value);
+                self.markpresetmodified();
         elif p==u'EtOHTime':
             if value >= 0 and value < MAXETOHTIME:
                 self.EtOHTime = timedelta(seconds=value);
+                self.markpresetmodified();
+        
         elif p==u'AcetoneTime':
             if value >= 0 and value < MAXETOHTIME:
                 self.AcetoneTime = timedelta(seconds=value);
+                self.currentPresetModified = true;
+                self.markpresetmodified();
+
 
 
         elif p==u'FixFlowRate':
             if value >= 0 and value < MAXFLOWRATE:
                 print "setting "+p+" to "+repr(value);
                 self.FixFlowRate = value;
+                self.currentPresetModified = true;
+                self.markpresetmodified();
+
         elif p==u'EtOHRinseFlowRate':
             if value >= 0 and value < MAXFLOWRATE:
                 self.EtOHRinseFlowRate = value;
+                self.currentPresetModified = true;
+                self.markpresetmodified();
+
+
         elif p==u'AcetoneFlowRate':
             if value >= 0 and value < MAXFLOWRATE:
                 self.AcetoneRinseFlowRate= value;
+                self.currentPresetModified = true;
+                self.markpresetmodified();
+
 
         elif p==u'StirBar':
             if value >= 0 and value <=1:
                 print "setting "+p+" to "+repr(value);
-                
                 self.StirBar= value;
+                self.markpresetmodified();
 
+
+        
+        elif p==u'H2OValveOpen':
+            if self.PlayPauseState == "Pause":
+                self.H2OValveOpen = not(self.H2OValveOpen);
+                self.markpresetmodified();
+
+            else:
+                print "cannot set while playing"
+
+        elif p==u'EtOHValveOpen':
+            if self.PlayPauseState == "Pause":
+                self.EtOHValveOpen = not(self.EtOHValveOpen);
+                self.markpresetmodified();
+
+            else:
+                print "cannot set while playing"
+
+
+        elif p==u'AcetoneValveOpen':
+            if self.PlayPauseState == "Pause":
+                self.AcetoneValveOpen = not(self.AcetoneValveOpen);
+                self.markpresetmodified();
+
+            else:
+                print "cannot set while playing"
+
+
+        elif p==u'WasteValveOpen':
+            if self.PlayPauseState == "Pause":
+                self.WasteValveOpen = not(self.WasteValveOpen);
+                self.markpresetmodified();
+       
+            else:
+                print "cannot set while playing"
 
         self.updatestate();
 
@@ -236,6 +410,10 @@ class ControllerState :
         localstate['EtOHTime']= render_template("templates.html");
         localstate['AcetoneTime']= render_template("templates.html");
         return localstate
+
+
+
+
 
 
 state = ControllerState()

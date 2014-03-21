@@ -109,18 +109,33 @@
             <div class="col-md-4 col-xs-12 myshow">
                 <div class = "row">
                     <p>
-                    <div class="col-md-8 col-xs-6">
+                    <div class="col-md-8 col-xs-4">
                         Preset
                     </div>
-                    <div class = "col-md-6 col-xs-6">
-                        <select class="form-control btn-xs btn-primary btn-block" id="Preset">
+                    <div class = "col-md-6 col-xs-4">
+                        <select class="form-control btn-xs btn-primary btn-block" id="PresetSelector" onChange="updatePreset(this)">
                             <span class="caret"></span>
                             <ul class="dropdown-menu" role="menu">
                                 <li><option selected="selected">Human</option></li>
                                 <li><option>Mouse</option></li>
-                            </ul>
+                             </ul>
                         </select>
                     </div>
+                    
+                    <div class = "col-md-6 col-xs-1">
+                        <button type="button" class= "btn btn-default btn-med" id="AddPresetButton" onClick="updatePreset(this)"><span class="glyphicon glyphicon-plus-sign"></button>
+                        
+                        </div>
+                    <div class = "col-md-6 col-xs-1">
+                        <button type="button" class= "btn btn-default btn-med" id="SavePresetButton" onClick="updatePreset(this)"><span class="glyphicon glyphicon-save"></button>
+                        
+                    </div>
+                    <div class = "col-md-6 col-xs-1">
+                        <button type="button" class= "btn btn-default btn-med" id="RemovePresetButton" onClick="updatePreset(this)"><span class="glyphicon glyphicon-remove-sign"></button>
+                        
+                    </div>
+
+
                     </p>
                 </div>
                 
@@ -262,7 +277,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
+                <button type="button" class= "btn btn-xs btn-primary" id ="H2OValveOpen" onClick="updateParameters(this)" value=0>Closed</button>
             </div>
         </div>
         
@@ -278,7 +293,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
+                <button type="button" class= "btn btn-xs btn-primary" id="EtOHValveOpen" onClick = "updateParameters(this)" value=0>Closed</button>
             </div>
             
         </div>
@@ -295,7 +310,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-xs-2">
-                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton" id="AcetoneValveOpen" onClick= "updateParameters(this)" value=0>Closed</button>
             </div>
             
         </div>
@@ -310,7 +325,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-xs-3">
-                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton">Closed</button>
+                <button type="button" class= "btn btn-xs btn-primary OpenCloseButton" id="WasteValveOpen" onClick = "updateParameters(this)" value=0>Closed</button>
             </div>
             
         </div>

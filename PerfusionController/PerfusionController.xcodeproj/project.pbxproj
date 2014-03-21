@@ -20,6 +20,7 @@
 		78AD4DCD18D91D8900C55834 /* templates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = templates.html; path = ../PythonServer/templates/templates.html; sourceTree = "<group>"; };
 		78AD4DCE18D91E0B00C55834 /* views.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = views.py; path = ../PythonServer/views.py; sourceTree = "<group>"; };
 		78AD4DCF18D920AB00C55834 /* controller.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = controller.py; path = ../PythonServer/controller.py; sourceTree = "<group>"; };
+		78AD4DD018DC738300C55834 /* presettemplates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = presettemplates.html; path = ../PythonServer/templates/presettemplates.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -38,6 +39,7 @@
 				78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */,
 				78776BA418C0DE370016FE11 /* uwsgi.ini */,
 				78776BA118C0DCF80016FE11 /* index.html */,
+				78AD4DD018DC738300C55834 /* presettemplates.html */,
 				78776BA718C147A10016FE11 /* index2.html */,
 			);
 			sourceTree = "<group>";

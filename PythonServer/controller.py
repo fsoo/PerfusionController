@@ -16,7 +16,7 @@ MAXFIXTIME = 24*60*60 #won't fix for more than 24 hours
 MAXETOHTIME = 24*60*60 #don't ETOH for more than 24 hour
 MAXACETONETIME = 24*60*60 #don't ETOH for more than 24 hour
 
-MAXFLOWRATE = 10 # 10 ml/min
+MAXFLOWRATE = 100 # 10 ml/min
 PRESETFILE = "presets"
 
 
@@ -107,7 +107,9 @@ class ControllerState :
             'EtOHTime':self.EtOHTime,
             'EtOHRinseFlowRate':self.EtOHRinseFlowRate,
             'AcetoneTime':self.AcetoneTime,
-            'AcetoneRinseFlowRate':self.AcetoneRinseFlowRate}
+            'AcetoneRinseFlowRate':self.AcetoneRinseFlowRate,
+     
+        }
         self.Presets[self.CurrentPreset] = p;
         self.savepresets(PRESETFILE);
 
@@ -137,7 +139,7 @@ class ControllerState :
             self.EtOHFlowRate = p['EtOHRinseFlowRate'];
             self.AcetoneTime = p['AcetoneTime'];
             self.AcetoneFlowRate = p['AcetoneRinseFlowRate'];
-            self.currentPresetModfied = False;
+            self.currentPresetModified = False;
 
     def markpresetmodified(self):
             self.currentPresetModified=True;
@@ -327,7 +329,6 @@ class ControllerState :
         elif p==u'AcetoneTime':
             if value >= 0 and value < MAXETOHTIME:
                 self.AcetoneTime = timedelta(seconds=value);
-                self.currentPresetModified = true;
                 self.markpresetmodified();
 
 
@@ -336,20 +337,17 @@ class ControllerState :
             if value >= 0 and value < MAXFLOWRATE:
                 print "setting "+p+" to "+repr(value);
                 self.FixFlowRate = value;
-                self.currentPresetModified = true;
                 self.markpresetmodified();
 
         elif p==u'EtOHRinseFlowRate':
             if value >= 0 and value < MAXFLOWRATE:
                 self.EtOHRinseFlowRate = value;
-                self.currentPresetModified = true;
                 self.markpresetmodified();
 
 
         elif p==u'AcetoneFlowRate':
             if value >= 0 and value < MAXFLOWRATE:
                 self.AcetoneRinseFlowRate= value;
-                self.currentPresetModified = true;
                 self.markpresetmodified();
 
 
@@ -404,11 +402,19 @@ class ControllerState :
             'FixTime': 0,
             'EtOHTime': 0,
             'AcetoneTime': 0,
+            'FixFlowRate' :0,
+            'EtOHRinseFlowRate' :0,
+            'AcetonRinseFlowRate' :0,
         
         };
         localstate['FixTime']= render_template("templates.html");
         localstate['EtOHTime']= render_template("templates.html");
         localstate['AcetoneTime']= render_template("templates.html");
+        localstate['FixFlowRate']= render_template("flowratetemplate.html");
+        localstate['EtOHRinseFlowRate']= render_template("flowratetemplate.html");
+        localstate['AcetoneRinseFlowRate']= render_template("flowratetemplate.html");
+                    
+
         return localstate
 
 

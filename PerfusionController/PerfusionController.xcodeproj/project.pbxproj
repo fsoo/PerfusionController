@@ -21,6 +21,7 @@
 		78AD4DCE18D91E0B00C55834 /* views.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = views.py; path = ../PythonServer/views.py; sourceTree = "<group>"; };
 		78AD4DCF18D920AB00C55834 /* controller.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = controller.py; path = ../PythonServer/controller.py; sourceTree = "<group>"; };
 		78AD4DD018DC738300C55834 /* presettemplates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = presettemplates.html; path = ../PythonServer/templates/presettemplates.html; sourceTree = "<group>"; };
+		78AD4DD118DC7FE000C55834 /* flowratetemplate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = flowratetemplate.html; path = ../PythonServer/templates/flowratetemplate.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -34,6 +35,7 @@
 				78AD4DCE18D91E0B00C55834 /* views.py */,
 				78AD4DCF18D920AB00C55834 /* controller.py */,
 				78AD4DCD18D91D8900C55834 /* templates.html */,
+				78AD4DD118DC7FE000C55834 /* flowratetemplate.html */,
 				78AD4DCC18D91C5500C55834 /* run.py */,
 				78776BA618C0E2170016FE11 /* startUWSGI.sh */,
 				78776BA318C0DE160016FE11 /* Cochlear_nginx.conf */,

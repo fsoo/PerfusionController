@@ -45,10 +45,18 @@ function parsestate(rawjsondata)
 
     $('#ServerTime').text(jsondata.ServerTimeString);
     $('#ElapsedTime').val(jsondata.ElapsedTime);
+    
+    $('#RemainingTime').val(jsondata.RemainingTime);
+    
     $('#FixTime').val(jsondata.FixTime);
     $('#EtOHTime').val(jsondata.EtOHTime);
     $('#AcetoneTime').val(jsondata.AcetoneTime);
-    $('#RemainingTime').val(jsondata.RemainingTime);
+    $('#FixFlowRate').val(jsondata.FixFlowRate);
+    $('#EtOHRinseFlowRate').val(jsondata.EtOHRinseFlowRate);
+    $('#AcetoneRinseFlowRate').val(jsondata.AcetoneRinseFlowRate);
+    
+    
+    
     $('#StirBar').val(jsondata.StirBar);
     
     // update flow rate progress bars
@@ -220,11 +228,13 @@ function updatePreset(sender)
     }
     
     if(r != null)
-    var s;
-    $.post(PRESETPATH, {name: sender.id, value: r},
-           function(data,status){
-           s= parsestate(data);
-           });
+    {
+        var s;
+        $.post(PRESETPATH, {name: sender.id, value: r},
+               function(data,status){
+               s= parsestate(data);
+               });
+    }
     updatePresetSelector();
 }
 
@@ -250,6 +260,9 @@ function loadDynamicContent()
           $('#FixTime').html(jsondata.FixTime);
           $('#EtOHTime').html(jsondata.EtOHTime);
           $('#AcetoneTime').html(jsondata.AcetoneTime);
+          $('#FixFlowRate').html(jsondata.FixFlowRate);
+          $('#EtOHRinseFlowRate').html(jsondata.EtOHRinseFlowRate);
+          $('#AcetoneRinseFlowRate').html(jsondata.AcetoneRinseFlowRate);
           
           
           });

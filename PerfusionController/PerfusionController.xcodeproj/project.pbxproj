@@ -22,6 +22,7 @@
 		78AD4DCF18D920AB00C55834 /* controller.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = controller.py; path = ../PythonServer/controller.py; sourceTree = "<group>"; };
 		78AD4DD018DC738300C55834 /* presettemplates.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = presettemplates.html; path = ../PythonServer/templates/presettemplates.html; sourceTree = "<group>"; };
 		78AD4DD118DC7FE000C55834 /* flowratetemplate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = flowratetemplate.html; path = ../PythonServer/templates/flowratetemplate.html; sourceTree = "<group>"; };
+		78AD4DD218DC85A800C55834 /* presets */ = {isa = PBXFileReference; lastKnownFileType = text; name = presets; path = ../PythonServer/presets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -30,6 +31,7 @@
 			children = (
 				78776BAD18C4D4980016FE11 /* jquery.mask.js */,
 				78776BA918C4B6320016FE11 /* index.js */,
+				78AD4DD218DC85A800C55834 /* presets */,
 				786355DE18C51BB000818957 /* Cochlear_Siegfried_nginx.conf */,
 				78776BA218C0DD080016FE11 /* hellotest.py */,
 				78AD4DCE18D91E0B00C55834 /* views.py */,
